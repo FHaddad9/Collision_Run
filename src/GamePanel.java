@@ -123,6 +123,9 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	public void newPoint() {
 		pointX = random.nextInt( (int) (screenWidth / normalTileSize)) * normalTileSize;
+		while((pointX % 5) != 0) {
+			pointX = random.nextInt( (int) (screenWidth / normalTileSize)) * normalTileSize;
+		}
 		pointY = 515;
 	}
 	
@@ -135,7 +138,11 @@ public class GamePanel extends JPanel implements Runnable{
 	}
 	
 	public void checkPoint() {
+		System.out.println("posX: " + posX);
+		System.out.println("pointX: " + pointX);
+		
 		if(posX == pointX) {
+			System.out.println("I work");
 			pointObtained++;
 			newPoint();
 		}
