@@ -36,6 +36,10 @@ public class GamePanel extends JPanel implements Runnable{
 	int colY;
 	Random random;
 	
+	// Point's positions
+	int pointX;
+	int pointY;
+	
 	// Frames per second
 	int fps = 60;
 	
@@ -113,10 +117,17 @@ public class GamePanel extends JPanel implements Runnable{
 		// set random collision of food in coordinates
 		colX = random.nextInt( (int) (screenWidth / normalTileSize)) * normalTileSize;
 		colY = 10;
+		
+		pointX = random.nextInt( (int) (screenWidth / normalTileSize)) * normalTileSize;
+		pointY = 515;
 	}
 	
 	public void dropCollision() {
-		colY += speed;
+		if(colY >= 576) {
+			newCollision();
+		} else {
+			colY += speed + 2;
+		}
 	}
 	
 	public void paintComponent(Graphics g) {
@@ -134,6 +145,9 @@ public class GamePanel extends JPanel implements Runnable{
 		
 		g.setColor(Color.red);
 		g.fillRect(colX, colY, normalTileSize, normalTileSize);
+		
+		g.setColor(Color.green);
+		g.fillOval(pointX, pointY, normalTileSize, normalTileSize);
 		
 		g2.dispose();
 	}
