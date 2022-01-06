@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.Random;
 
 import javax.swing.JPanel;
 
@@ -30,12 +31,18 @@ public class GamePanel extends JPanel implements Runnable{
 	int posY = 500;
 	int speed = 5;
 	
+	// Collision's positions
+	int colX;
+	int colY;
+	Random random;
+	
 	// Frames per second
 	int fps = 60;
 	
 	public GamePanel() {
 		
 		// Constructor for the window
+		this.random = new Random();
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
 		this.setBackground(Color.black);
 		this.setDoubleBuffered(true);
@@ -48,6 +55,8 @@ public class GamePanel extends JPanel implements Runnable{
 		// Starts the game by calling the run method
 		gameThread = new Thread(this);
 		gameThread.start();
+		
+		newCollision();
 	}
 	
 	public void run() {
@@ -96,6 +105,18 @@ public class GamePanel extends JPanel implements Runnable{
 		} else if(key.right) {
 			posX += speed;
 		}
+		
+		dropCollision();
+	}
+	
+	public void newCollision() {
+		// set random collision of food in coordinates
+		colX = random.nextInt( (int) (screenWidth / normalTileSize)) * normalTileSize;
+		colY = 10;
+	}
+	
+	public void dropCollision() {
+		colY += speed;
 	}
 	
 	public void paintComponent(Graphics g) {
@@ -108,6 +129,11 @@ public class GamePanel extends JPanel implements Runnable{
 		// Temporary "Character" for game. Which is just a white square :p
 		g2.setColor(Color.white);		
 		g2.fillRect(posX, posY, tileSize, tileSize);
+		
+		g2.fillRect(0, 560, screenWidth, screenHeight);
+		
+		g.setColor(Color.red);
+		g.fillRect(colX, colY, normalTileSize, normalTileSize);
 		
 		g2.dispose();
 	}
