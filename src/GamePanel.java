@@ -39,6 +39,7 @@ public class GamePanel extends JPanel implements Runnable{
 	// Point's positions
 	int pointX;
 	int pointY;
+	int pointObtained = 0;
 	
 	// Frames per second
 	int fps = 60;
@@ -111,13 +112,16 @@ public class GamePanel extends JPanel implements Runnable{
 		}
 		
 		dropCollision();
+		checkPoint();
 	}
 	
 	public void newCollision() {
 		// set random collision of food in coordinates
 		colX = random.nextInt( (int) (screenWidth / normalTileSize)) * normalTileSize;
 		colY = 10;
-		
+	}
+	
+	public void newPoint() {
 		pointX = random.nextInt( (int) (screenWidth / normalTileSize)) * normalTileSize;
 		pointY = 515;
 	}
@@ -130,8 +134,14 @@ public class GamePanel extends JPanel implements Runnable{
 		}
 	}
 	
+	public void checkPoint() {
+		if(posX == pointX) {
+			pointObtained++;
+			newPoint();
+		}
+	}
+	
 	public void paintComponent(Graphics g) {
-		
 		super.paintComponent(g);
 		
 		// Graphics2D better than Graphics
@@ -148,6 +158,7 @@ public class GamePanel extends JPanel implements Runnable{
 		
 		g.setColor(Color.green);
 		g.fillOval(pointX, pointY, normalTileSize, normalTileSize);
+		//System.out.println("Points: " + pointObtained);
 		
 		g2.dispose();
 	}
