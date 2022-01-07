@@ -141,8 +141,7 @@ public class GamePanel extends JPanel implements Runnable{
 		
 		if(((colX >= posX) && (colX <= (posX+tileSize)) && ((colY >= posY) && (colY <= (posY+tileSize))))) {
 			gameOver = true;
-		} else {
-			
+		} else {			
 			if(colY >= 576) {
 				newCollision();
 			} else {
