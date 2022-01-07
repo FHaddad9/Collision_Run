@@ -1,6 +1,8 @@
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.Random;
@@ -44,6 +46,8 @@ public class GamePanel extends JPanel implements Runnable{
 	// Frames per second
 	int fps = 60;
 	
+	boolean gameOver = false;
+	
 	public GamePanel() {
 		
 		// Constructor for the window
@@ -62,6 +66,7 @@ public class GamePanel extends JPanel implements Runnable{
 		gameThread.start();
 		
 		newCollision();
+		newPoint();
 	}
 	
 	public void run() {
@@ -118,6 +123,9 @@ public class GamePanel extends JPanel implements Runnable{
 	public void newCollision() {
 		// set random collision of food in coordinates
 		colX = random.nextInt( (int) (screenWidth / normalTileSize)) * normalTileSize;
+		while((colX % 5) != 0) {
+			colX = random.nextInt( (int) (screenWidth / normalTileSize)) * normalTileSize;
+		}
 		colY = 10;
 	}
 	
@@ -130,10 +138,16 @@ public class GamePanel extends JPanel implements Runnable{
 	}
 	
 	public void dropCollision() {
-		if(colY >= 576) {
-			newCollision();
+		
+		if(((colX >= posX) && (colX <= (posX+tileSize)) && ((colY >= posY) && (colY <= (posY+tileSize))))) {
+			gameOver = true;
 		} else {
-			colY += speed + 2;
+			
+			if(colY >= 576) {
+				newCollision();
+			} else {
+				colY += speed + 2;
+			}	
 		}
 	}
 	
@@ -141,8 +155,7 @@ public class GamePanel extends JPanel implements Runnable{
 		System.out.println("posX: " + posX);
 		System.out.println("pointX: " + pointX);
 		
-		if(posX == pointX) {
-			System.out.println("I work");
+		if(pointX >= posX && pointX <= (posX+tileSize)) {
 			pointObtained++;
 			newPoint();
 		}
@@ -166,6 +179,15 @@ public class GamePanel extends JPanel implements Runnable{
 		g.setColor(Color.green);
 		g.fillOval(pointX, pointY, normalTileSize, normalTileSize);
 		//System.out.println("Points: " + pointObtained);
+		
+		g.setColor(Color.red);
+		g.setFont(new Font("Ink Free", Font.BOLD, 40));
+		FontMetrics metrics = getFontMetrics(g.getFont());
+		g.drawString("Score: " + pointObtained, ((screenWidth - metrics.stringWidth("Score: " + pointObtained)) / 2), g.getFont().getSize());
+		
+		if(gameOver) {
+			
+		}
 		
 		g2.dispose();
 	}
