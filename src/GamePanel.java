@@ -36,6 +36,7 @@ public class GamePanel extends JPanel implements Runnable{
 	// Collision's positions
 	int colX;
 	int colY;
+	int colSpeed = 5;
 	Random random;
 	
 	// Point's positions
@@ -67,6 +68,11 @@ public class GamePanel extends JPanel implements Runnable{
 		
 		newCollision();
 		newPoint();
+	}
+	
+	@SuppressWarnings("deprecation")
+	public void stopGameThread() {
+		gameThread.stop();
 	}
 	
 	public void run() {
@@ -145,8 +151,46 @@ public class GamePanel extends JPanel implements Runnable{
 			if(colY >= 576) {
 				newCollision();
 			} else {
-				colY += speed + 2;
+				colY += colSpeed + 2;
 			}	
+		}
+		
+		if((pointObtained >= 1) && (pointObtained % 5 == 0)) {
+
+			System.out.println("I work");
+			System.out.println("I work");
+			System.out.println("I work");
+			System.out.println("I work");
+			System.out.println("I work");
+			System.out.println("I work");
+			System.out.println("I work");
+			System.out.println("I work");
+			System.out.println("I work");
+			System.out.println("I work");
+			System.out.println("I work");
+			System.out.println("I work");
+			System.out.println("I work");
+			System.out.println("I work");
+			System.out.println("I work");
+			System.out.println("I work");
+			System.out.println("I work");
+			System.out.println("I work");
+			System.out.println("I work");
+			System.out.println("I work");
+			System.out.println("I work");
+			System.out.println("I work");
+			System.out.println("I work");
+			System.out.println("I work");
+			System.out.println("I work");
+			System.out.println("I work");
+			System.out.println("I work");
+			System.out.println("I work");
+			System.out.println("I work");
+			System.out.println("I work");
+			System.out.println("I work");
+			System.out.println("I work");
+			pointObtained++;
+			colSpeed += 2;
 		}
 	}
 	
@@ -185,7 +229,12 @@ public class GamePanel extends JPanel implements Runnable{
 		g.drawString("Score: " + pointObtained, ((screenWidth - metrics.stringWidth("Score: " + pointObtained)) / 2), g.getFont().getSize());
 		
 		if(gameOver) {
-			
+			repaint();
+			g.setColor(Color.red);
+			g.setFont(new Font("Ink Free", Font.BOLD, 75));
+			FontMetrics metrics2 = getFontMetrics(g.getFont());
+			g.drawString("Game Over", ((screenWidth - metrics2.stringWidth("Game Over")) / 2), (screenHeight / 4));
+			stopGameThread();
 		}
 		
 		g2.dispose();

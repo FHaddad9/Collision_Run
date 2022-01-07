@@ -18,5 +18,6 @@ public class Play {
 		window.setVisible(true);
 		
 		gamePanel.startGameThread();
+		
 	}
 }
