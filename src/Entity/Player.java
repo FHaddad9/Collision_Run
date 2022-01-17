@@ -36,7 +36,7 @@ public class Player extends Entity{
 		speed = 5;
 		
 		// Defailt direction is down
-		direction = "left";
+		direction = "right";
 	}
 	
 	public void update() {
@@ -115,5 +115,7 @@ public class Player extends Entity{
 		
 		g2.drawImage(image, gp.posX, gp.posY, gp.tileSize, gp.tileSize, null);
 		g2.drawImage(image2, gp.colX, gp.colY, gp.tileSize, gp.tileSize, null);
+		
+		update();
 	}
 }

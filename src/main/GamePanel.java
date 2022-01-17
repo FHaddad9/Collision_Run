@@ -191,7 +191,7 @@ public class GamePanel extends JPanel implements Runnable{
 ////		// Temporary "Character" for game. Which is just a white square :p
 ////		g2.setColor(Color.white);		
 ////		g2.fillRect(posX, posY, tileSize, tileSize);
-		
+		g2.setColor(Color.white);	
 		g2.fillRect(0, 560, screenWidth, screenHeight);
 		
 		g.setColor(Color.green);
