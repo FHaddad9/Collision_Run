@@ -9,7 +9,7 @@ public class Entity {
 	public int speed;
 	
 	// Image with accessible buffer image data
-	public BufferedImage left1, left2, right1, right2;
+	public BufferedImage left1, left2, right1, right2, fire;
 	
 	public String direction;
 	

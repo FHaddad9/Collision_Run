@@ -11,12 +11,14 @@ import java.util.Random;
 
 import javax.swing.JPanel;
 
+import Entity.Player;
+
 public class GamePanel extends JPanel implements Runnable{
 	
 	// screen dimensions
 	final int normalTileSize = 16;	// 16x16 tiles, basically since it's 16 bit game
 	final int scale = 3;	// Enlarge the 16 pixels
-	final int tileSize = normalTileSize * scale;	// Scaled tile
+	public final int tileSize = normalTileSize * scale;	// Scaled tile
 	
 	// Ratio 4:3 screen
 	final int screenCol = 16;
@@ -30,14 +32,17 @@ public class GamePanel extends JPanel implements Runnable{
 	// Gets keys pressed by user
 	KeyHandler key = new KeyHandler();
 	
+	// Get player class for entitys
+	Player player = new Player(this, key);
+	
 	// Player's default position
-	int posX = 350;
-	int posY = 500;
+	public int posX = 350;
+	public int posY = 500;
 	int speed = 5;
 	
 	// Collision's positions
-	int colX;
-	int colY;
+	public int colX;
+	public int colY;
 	int colSpeed = 5;
 	Random random;
 	
@@ -158,42 +163,11 @@ public class GamePanel extends JPanel implements Runnable{
 		}
 		
 		if((pointObtained >= 1) && (pointObtained % 5 == 0)) {
-
-			System.out.println("I work");
-			System.out.println("I work");
-			System.out.println("I work");
-			System.out.println("I work");
-			System.out.println("I work");
-			System.out.println("I work");
-			System.out.println("I work");
-			System.out.println("I work");
-			System.out.println("I work");
-			System.out.println("I work");
-			System.out.println("I work");
-			System.out.println("I work");
-			System.out.println("I work");
-			System.out.println("I work");
-			System.out.println("I work");
-			System.out.println("I work");
-			System.out.println("I work");
-			System.out.println("I work");
-			System.out.println("I work");
-			System.out.println("I work");
-			System.out.println("I work");
-			System.out.println("I work");
-			System.out.println("I work");
-			System.out.println("I work");
-			System.out.println("I work");
-			System.out.println("I work");
-			System.out.println("I work");
-			System.out.println("I work");
-			System.out.println("I work");
-			System.out.println("I work");
-			System.out.println("I work");
-			System.out.println("I work");
 			pointObtained++;
 			colSpeed += 2;
 		}
+		
+		
 	}
 	
 	public void checkPoint() {
@@ -210,16 +184,15 @@ public class GamePanel extends JPanel implements Runnable{
 		super.paintComponent(g);
 		
 		// Graphics2D better than Graphics
-		Graphics g2 = (Graphics2D)g;
+		Graphics2D g2 = (Graphics2D)g;
 		
-		// Temporary "Character" for game. Which is just a white square :p
-		g2.setColor(Color.white);		
-		g2.fillRect(posX, posY, tileSize, tileSize);
+		player.draw(g2);
+////		
+////		// Temporary "Character" for game. Which is just a white square :p
+////		g2.setColor(Color.white);		
+////		g2.fillRect(posX, posY, tileSize, tileSize);
 		
 		g2.fillRect(0, 560, screenWidth, screenHeight);
-		
-		g.setColor(Color.red);
-		g.fillRect(colX, colY, normalTileSize, normalTileSize);
 		
 		g.setColor(Color.green);
 		g.fillOval(pointX, pointY, normalTileSize, normalTileSize);
