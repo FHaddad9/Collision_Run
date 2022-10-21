@@ -74,7 +74,9 @@ public class GamePanel extends JPanel implements Runnable{
 		gameThread.start();
 		
 		newCollision();
-		newPoint();
+		newPoint();int num = 0;
+		System.out.println(num);
+		num++;
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -98,6 +100,7 @@ public class GamePanel extends JPanel implements Runnable{
 		
 		// Delta gets the interval between the time when loop started and current time and repaints
 		while(gameThread != null) {
+			
 			
 			currentTime = System.nanoTime();
 			

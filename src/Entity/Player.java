@@ -73,11 +73,11 @@ public class Player extends Entity{
 		try {
 			
 			// Gets images of sprites into IO and display
-			left1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_left_1.png"));
-			left2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_left_2.png"));
-			right1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_right_1.png"));
-			right2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_right_2.png"));
-			fire = ImageIO.read(getClass().getResourceAsStream("/player/Fireball.png"));
+			left1 = ImageIO.read(getClass().getResourceAsStream("/player/Blueman_Left.png"));
+			left2 = ImageIO.read(getClass().getResourceAsStream("/player/Blueman_Left2.png"));
+			right1 = ImageIO.read(getClass().getResourceAsStream("/player/Blueman_Right.png"));
+			right2 = ImageIO.read(getClass().getResourceAsStream("/player/Blueman_Right2.png"));
+			fire = ImageIO.read(getClass().getResourceAsStream("/player/32.png"));
 			
 		} catch(IOException e) {
 			e.printStackTrace();
